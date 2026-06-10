@@ -285,13 +285,32 @@
           <label for="nombre">Nombre</label>
           <input id="nombre" type="text" name="nombre" placeholder="Tu nombre" autocomplete="name" required>
 
+          <label for="empresa">Empresa</label>
+          <input id="empresa" type="text" name="empresa" placeholder="Nombre de tu empresa" autocomplete="organization">
+
+          <label for="telefono">Teléfono</label>
+          <input id="telefono" type="tel" name="telefono" placeholder="Tu número de contacto" autocomplete="tel" required>
+
           <label for="correo">Correo</label>
           <input id="correo" type="email" name="correo" placeholder="tuempresa@correo.com" autocomplete="email" required>
+
+          <label for="servicio">Servicio de interés</label>
+          <select id="servicio" name="servicio" required>
+            <option value="" selected disabled>Selecciona un servicio</option>
+            <option value="Redes móviles y nodos">Redes móviles y nodos</option>
+            <option value="Fibra óptica y acceso">Fibra óptica y acceso</option>
+            <option value="Radioenlaces y microondas">Radioenlaces y microondas</option>
+            <option value="Energía e integración">Energía e integración</option>
+            <option value="Cableado y networking">Cableado y networking</option>
+            <option value="Infraestructura y seguridad">Infraestructura y seguridad</option>
+            <option value="Otro">Otro</option>
+          </select>
 
           <label for="mensaje">Mensaje</label>
           <textarea id="mensaje" name="mensaje" rows="5" placeholder="Cuéntanos qué servicio necesitas" required></textarea>
 
           <button class="btn btn-primary" type="submit">Solicitar información por WhatsApp</button>
+          <p class="form-note">Te responderemos a la brevedad por WhatsApp o correo.</p>
         </form>
       </div>
     </section>

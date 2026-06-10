@@ -59,14 +59,20 @@ if (contactForm) {
 
     const formData = new FormData(contactForm);
     const name = String(formData.get('nombre') || '').trim();
+    const company = String(formData.get('empresa') || '').trim();
+    const phone = String(formData.get('telefono') || '').trim();
     const email = String(formData.get('correo') || '').trim();
+    const service = String(formData.get('servicio') || '').trim();
     const message = String(formData.get('mensaje') || '').trim();
 
     const whatsappMessage = [
       'Hola Demercom, deseo solicitar información sobre sus servicios.',
       '',
       `Nombre: ${name}`,
+      `Empresa: ${company || 'No indicada'}`,
+      `Teléfono: ${phone}`,
       `Correo: ${email}`,
+      `Servicio de interés: ${service}`,
       `Mensaje: ${message}`
     ].join('\n');
 

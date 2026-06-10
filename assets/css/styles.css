@@ -37,6 +37,7 @@ a {
 }
 
 input,
+select,
 textarea,
 button {
   font: inherit;
@@ -873,6 +874,7 @@ td {
 }
 
 .contact-form input,
+.contact-form select,
 .contact-form textarea {
   width: 100%;
   border: 1px solid var(--border);
@@ -883,6 +885,7 @@ td {
 }
 
 .contact-form input:focus,
+.contact-form select:focus,
 .contact-form textarea:focus {
   outline: 3px solid rgba(59,180,193,.28);
   border-color: var(--accent-2);
@@ -890,6 +893,13 @@ td {
 
 .contact-form .btn {
   width: 100%;
+}
+
+.form-note {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: .94rem;
+  text-align: center;
 }
 
 .site-footer {
