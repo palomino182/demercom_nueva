@@ -60,6 +60,54 @@ button {
   overflow: hidden;
 }
 
+.header-parallax {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.header-orb,
+.header-grid {
+  position: absolute;
+  will-change: transform;
+}
+
+.header-orb {
+  border-radius: 50%;
+  filter: blur(6px);
+  opacity: .8;
+}
+
+.orb-a {
+  top: 92px;
+  left: -40px;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(8,174,234,.18) 0%, rgba(8,174,234,0) 72%);
+}
+
+.orb-b {
+  right: -30px;
+  bottom: 42px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(0,63,143,.12) 0%, rgba(0,63,143,0) 72%);
+}
+
+.header-grid {
+  inset: 88px 10% auto auto;
+  width: 300px;
+  height: 180px;
+  border-radius: 28px;
+  background:
+    linear-gradient(rgba(8,174,234,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,63,143,.08) 1px, transparent 1px);
+  background-size: 26px 26px;
+  mask-image: linear-gradient(135deg, rgba(0,0,0,.85), rgba(0,0,0,0));
+  opacity: .55;
+}
+
 .site-header::after {
   content: "";
   position: absolute;
@@ -1014,6 +1062,11 @@ td {
     opacity: 1;
     transform: none;
   }
+
+  .header-orb,
+  .header-grid {
+    transform: none !important;
+  }
 }
 
 @media (max-width: 900px) {
@@ -1116,6 +1169,13 @@ td {
     padding-top: 70px;
   }
 
+  .header-grid {
+    right: 4%;
+    width: 220px;
+    height: 140px;
+    opacity: .4;
+  }
+
   .hero-metrics {
     grid-template-columns: 1fr;
   }
@@ -1145,6 +1205,20 @@ td {
     min-height: auto;
   }
 
+  .orb-a {
+    top: 70px;
+    left: -90px;
+    width: 220px;
+    height: 220px;
+  }
+
+  .orb-b {
+    right: -90px;
+    bottom: 20px;
+    width: 220px;
+    height: 220px;
+  }
+
   .brand img {
     height: 58px;
     max-width: 240px;
@@ -1162,6 +1236,10 @@ td {
 
   .hero {
     padding: 28px 0 72px;
+  }
+
+  .header-grid {
+    display: none;
   }
 
   .hero-trust {

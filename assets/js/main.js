@@ -3,6 +3,10 @@ const menu = document.querySelector('.nav-menu');
 const navbar = document.querySelector('.navbar');
 const year = document.querySelector('#year');
 const contactForm = document.querySelector('#contact-form');
+const parallaxLayer = document.querySelector('.header-parallax');
+const parallaxOrbA = document.querySelector('.orb-a');
+const parallaxOrbB = document.querySelector('.orb-b');
+const parallaxGrid = document.querySelector('.header-grid');
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -51,6 +55,23 @@ if (navbar) {
 
   updateNavbar();
   window.addEventListener('scroll', updateNavbar, { passive: true });
+}
+
+if (parallaxLayer && parallaxOrbA && parallaxOrbB && parallaxGrid) {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const updateParallax = () => {
+    if (prefersReducedMotion || window.innerWidth <= 900) return;
+
+    const scrollOffset = Math.min(window.scrollY, 420);
+    parallaxOrbA.style.transform = `translate3d(0, ${scrollOffset * 0.12}px, 0)`;
+    parallaxOrbB.style.transform = `translate3d(0, ${scrollOffset * -0.08}px, 0)`;
+    parallaxGrid.style.transform = `translate3d(0, ${scrollOffset * 0.06}px, 0)`;
+  };
+
+  updateParallax();
+  window.addEventListener('scroll', updateParallax, { passive: true });
+  window.addEventListener('resize', updateParallax);
 }
 
 if (contactForm) {
