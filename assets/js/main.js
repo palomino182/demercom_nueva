@@ -8,6 +8,10 @@ const parallaxOrbA = document.querySelector('.orb-a');
 const parallaxOrbB = document.querySelector('.orb-b');
 const parallaxGrid = document.querySelector('.header-grid');
 const mobileMoreButtons = document.querySelectorAll('.mobile-more-btn');
+const navSectionLinks = document.querySelectorAll('.nav-menu a[data-section]');
+const trackedSections = document.querySelectorAll('main section[id]');
+const backToTopButton = document.querySelector('.back-to-top');
+const scrollProgressBar = document.querySelector('.scroll-progress-bar');
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -50,12 +54,76 @@ if (toggle && menu) {
 }
 
 if (navbar) {
+  let lastScrollY = window.scrollY;
+
   const updateNavbar = () => {
-    navbar.classList.toggle('is-scrolled', window.scrollY > 24);
+    const currentScrollY = window.scrollY;
+    const isDesktop = window.innerWidth > 900;
+    const scrollingDown = currentScrollY > lastScrollY;
+    const passedThreshold = currentScrollY > 120;
+
+    navbar.classList.toggle('is-scrolled', currentScrollY > 24);
+    navbar.classList.toggle('is-compact', currentScrollY > 80);
+    navbar.classList.toggle('is-hidden', isDesktop && scrollingDown && passedThreshold && !menu?.classList.contains('open'));
+
+    lastScrollY = currentScrollY;
   };
 
   updateNavbar();
   window.addEventListener('scroll', updateNavbar, { passive: true });
+  window.addEventListener('resize', updateNavbar);
+}
+
+if (navSectionLinks.length && trackedSections.length) {
+  const setActiveSection = (sectionId) => {
+    navSectionLinks.forEach((link) => {
+      const isActive = link.dataset.section === sectionId;
+      link.classList.toggle('is-active', isActive);
+      link.setAttribute('aria-current', isActive ? 'page' : 'false');
+    });
+  };
+
+  const detectActiveSection = () => {
+    const viewportTrigger = window.scrollY + 180;
+    let currentSectionId = trackedSections[0].id;
+
+    trackedSections.forEach((section) => {
+      if (viewportTrigger >= section.offsetTop) {
+        currentSectionId = section.id;
+      }
+    });
+
+    setActiveSection(currentSectionId);
+  };
+
+  detectActiveSection();
+  window.addEventListener('scroll', detectActiveSection, { passive: true });
+  window.addEventListener('resize', detectActiveSection);
+}
+
+if (backToTopButton) {
+  const toggleBackToTop = () => {
+    backToTopButton.classList.toggle('is-visible', window.scrollY > 520);
+  };
+
+  backToTopButton.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  toggleBackToTop();
+  window.addEventListener('scroll', toggleBackToTop, { passive: true });
+}
+
+if (scrollProgressBar) {
+  const updateScrollProgress = () => {
+    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0;
+    scrollProgressBar.style.transform = `scaleX(${Math.min(Math.max(progress / 100, 0), 1)})`;
+  };
+
+  updateScrollProgress();
+  window.addEventListener('scroll', updateScrollProgress, { passive: true });
+  window.addEventListener('resize', updateScrollProgress);
 }
 
 if (parallaxLayer && parallaxOrbA && parallaxOrbB && parallaxGrid) {

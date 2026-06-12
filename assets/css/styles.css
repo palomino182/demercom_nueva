@@ -27,6 +27,31 @@ body {
   line-height: 1.6;
 }
 
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,.18);
+  z-index: 90;
+  pointer-events: none;
+}
+
+.scroll-progress-bar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--primary), var(--accent-2));
+  transform: scaleX(0);
+  transform-origin: left center;
+  box-shadow: 0 4px 18px rgba(0, 106, 183, .24);
+}
+
+main section[id] {
+  scroll-margin-top: 108px;
+}
+
 body.menu-open {
   overflow: hidden;
 }
@@ -140,7 +165,7 @@ button {
   top: 0;
   z-index: 40;
   gap: 20px;
-  transition: background .2s ease, box-shadow .2s ease, border-color .2s ease;
+  transition: background .2s ease, box-shadow .2s ease, border-color .2s ease, transform .28s ease, opacity .28s ease;
 }
 
 .navbar.is-scrolled {
@@ -149,6 +174,15 @@ button {
   border-radius: 0 0 14px 14px;
   background: rgba(255,255,255,.96);
   box-shadow: 0 16px 36px rgba(0, 63, 143, .12);
+}
+
+.navbar.is-compact {
+  gap: 16px;
+}
+
+.navbar.is-hidden {
+  transform: translateY(-115%);
+  opacity: .02;
 }
 
 .brand {
@@ -164,6 +198,12 @@ button {
   max-width: min(260px, 22vw);
   object-fit: contain;
   animation: logo-enter .7s ease both;
+  transition: height .24s ease, max-width .24s ease, transform .24s ease;
+}
+
+.navbar.is-compact .brand img {
+  height: 88px;
+  max-width: min(220px, 18vw);
 }
 
 .nav-menu {
@@ -171,17 +211,43 @@ button {
   align-items: center;
   gap: 16px;
   font-weight: 700;
+  transition: gap .22s ease;
 }
 
 .nav-menu a {
+  position: relative;
   color: var(--primary);
   font-size: .98rem;
   transition: color .18s ease, background .18s ease;
 }
 
+.nav-menu a::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: -8px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .22s ease;
+}
+
 .nav-menu a:hover,
 .nav-menu a:focus-visible {
   color: var(--accent);
+}
+
+.nav-menu a:hover::after,
+.nav-menu a:focus-visible::after,
+.nav-menu a.is-active::after {
+  transform: scaleX(1);
+}
+
+.nav-menu a.is-active {
+  color: var(--primary);
 }
 
 .nav-cta {
@@ -190,6 +256,20 @@ button {
   background: var(--primary);
   color: var(--white) !important;
   box-shadow: 0 12px 24px rgba(0,63,143,.18);
+  transition: padding .22s ease, box-shadow .22s ease, background .22s ease;
+}
+
+.nav-cta::after {
+  display: none;
+}
+
+.navbar.is-compact .nav-menu {
+  gap: 12px;
+}
+
+.navbar.is-compact .nav-cta {
+  padding: 8px 16px;
+  box-shadow: 0 10px 20px rgba(0,63,143,.16);
 }
 
 .nav-toggle {
@@ -233,6 +313,41 @@ button {
 
 .nav-toggle[aria-expanded="true"] span:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
+}
+
+.back-to-top {
+  position: fixed;
+  right: 22px;
+  bottom: 98px;
+  width: 52px;
+  height: 52px;
+  border: 0;
+  border-radius: 18px;
+  background: linear-gradient(180deg, var(--primary), var(--primary-2));
+  color: var(--white);
+  font-size: 1.4rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 18px 34px rgba(0, 63, 143, .24);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity .22s ease, transform .22s ease, visibility .22s ease, box-shadow .22s ease;
+  z-index: 35;
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 40px rgba(0, 63, 143, .3);
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .hero {
@@ -1499,6 +1614,10 @@ td {
 }
 
 @media (max-width: 900px) {
+  .scroll-progress {
+    height: 3px;
+  }
+
   body.menu-open {
     overflow: hidden;
   }
@@ -1564,6 +1683,12 @@ td {
     font-size: 1rem;
   }
 
+  .nav-menu a::after {
+    left: 18px;
+    right: 18px;
+    bottom: 9px;
+  }
+
   .nav-menu a:hover,
   .nav-menu a:focus-visible {
     background: #edf7fc;
@@ -1582,6 +1707,14 @@ td {
     color: var(--white) !important;
     border-radius: 18px;
     box-shadow: 0 16px 28px rgba(0,63,143,.2);
+  }
+
+  .back-to-top {
+    right: 16px;
+    bottom: 88px;
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
   }
 
   .hero,
@@ -1639,6 +1772,10 @@ td {
 }
 
 @media (max-width: 560px) {
+  .scroll-progress {
+    height: 3px;
+  }
+
   .section-container {
     width: min(100% - 28px, 1120px);
   }
@@ -1675,9 +1812,18 @@ td {
     max-height: calc(100vh - 94px);
   }
 
+  main section[id] {
+    scroll-margin-top: 88px;
+  }
+
 
   .hero {
     padding: 28px 0 72px;
+  }
+
+  .back-to-top {
+    right: 14px;
+    bottom: 84px;
   }
 
   .header-grid {
