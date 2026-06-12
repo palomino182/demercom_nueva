@@ -7,6 +7,7 @@ const parallaxLayer = document.querySelector('.header-parallax');
 const parallaxOrbA = document.querySelector('.orb-a');
 const parallaxOrbB = document.querySelector('.orb-b');
 const parallaxGrid = document.querySelector('.header-grid');
+const mobileMoreButtons = document.querySelectorAll('.mobile-more-btn');
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -99,6 +100,31 @@ if (contactForm) {
 
     const whatsappUrl = `https://wa.me/51955481375?text=${encodeURIComponent(whatsappMessage)}`;
     window.open(whatsappUrl, '_blank', 'noopener');
+  });
+}
+
+if (mobileMoreButtons.length) {
+  mobileMoreButtons.forEach((button) => {
+    const targetSelector = button.getAttribute('data-target');
+    const target = targetSelector ? document.querySelector(targetSelector) : null;
+
+    if (!target) return;
+
+    button.addEventListener('click', () => {
+      const isExpanded = target.classList.toggle('is-expanded');
+      button.textContent = isExpanded ? 'Ver menos' : button.textContent.replace('Ver menos', '').trim() || 'Ver más';
+
+      if (!isExpanded) {
+        if (targetSelector.includes('projects')) button.textContent = 'Ver más proyectos';
+        if (targetSelector.includes('capabilities')) button.textContent = 'Ver más capacidades';
+        if (targetSelector.includes('infrastructure')) button.textContent = 'Ver más infraestructura';
+        if (targetSelector.includes('civil')) button.textContent = 'Ver más obras civiles';
+      }
+
+      if (isExpanded) {
+        button.textContent = 'Ver menos';
+      }
+    });
   });
 }
 

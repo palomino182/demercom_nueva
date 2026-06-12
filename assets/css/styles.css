@@ -1051,6 +1051,27 @@ h3 {
   color: var(--muted);
 }
 
+.mobile-more-btn {
+  display: none;
+  margin: 18px auto 0;
+  padding: 12px 18px;
+  border: 1px solid rgba(0,63,143,.18);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--primary);
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(0, 63, 143, .08);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.mobile-more-btn:hover,
+.mobile-more-btn:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(8,174,234,.32);
+  box-shadow: 0 16px 28px rgba(0, 63, 143, .12);
+}
+
 .table-wrap {
   overflow-x: auto;
   background: var(--white);
@@ -1696,7 +1717,7 @@ td {
   }
 
   .section {
-    padding: 68px 0;
+    padding: 56px 0;
   }
 
   .cards-grid,
@@ -1719,9 +1740,38 @@ td {
     grid-template-columns: 1fr;
   }
 
+  .projects-showcase:not(.is-expanded) article:nth-child(n+3),
+  .capabilities-grid:not(.is-expanded) .capability-card:nth-child(n+3),
+  .infrastructure-grid:not(.is-expanded) article:nth-child(n+3),
+  .civil-grid:not(.is-expanded) article:nth-child(n+3) {
+    display: none;
+  }
+
+  .mobile-more-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .featured-project-content,
   .capabilities-cta {
     padding: 22px;
+  }
+
+  .featured-project {
+    gap: 18px;
+    margin-bottom: 22px;
+  }
+
+  .featured-project-media {
+    min-height: 250px;
+  }
+
+  .projects-showcase article img,
+  .infrastructure-grid img,
+  .civil-grid img,
+  .capability-visual {
+    height: 190px;
   }
 
   .contact-row {
