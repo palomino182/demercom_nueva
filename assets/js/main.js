@@ -196,25 +196,53 @@ if (mobileMoreButtons.length) {
   });
 }
 
-const revealItems = document.querySelectorAll(
-  '.section-heading, .intro-grid, .mission-vision article, .why-grid article, .services-list article, .projects-grid article, .logos-grid span, .contact-list, .contact-form'
-);
+const revealGroups = [
+  {
+    selector: '.section-heading, .intro-grid > *, .mission-vision article, .capabilities-cta, .footer-bottom',
+    variant: 'reveal-soft',
+    stagger: 70
+  },
+  {
+    selector: '.why-grid article, .services-list article, .projects-showcase article, .capabilities-grid .capability-card, .infrastructure-grid article, .civil-grid article, .logos-grid span',
+    variant: 'reveal-up',
+    stagger: 85
+  },
+  {
+    selector: '.featured-project-media, .contact-list, .footer-brand',
+    variant: 'reveal-left',
+    stagger: 90
+  },
+  {
+    selector: '.featured-project-content, .contact-form, .footer-links, .footer-contact',
+    variant: 'reveal-right',
+    stagger: 95
+  }
+];
+
+const revealItems = [];
+
+revealGroups.forEach(({ selector, variant, stagger }) => {
+  document.querySelectorAll(selector).forEach((item, index) => {
+    item.classList.add('reveal', variant);
+    item.style.transitionDelay = `${Math.min(index, 5) * stagger}ms`;
+    revealItems.push(item);
+  });
+});
 
 if (revealItems.length) {
-  revealItems.forEach((item, index) => {
-    item.classList.add('reveal');
-    item.style.transitionDelay = `${Math.min(index % 6, 5) * 60}ms`;
-  });
-
-  const reveal = (entry) => {
+  const reveal = (entry, observer) => {
     if (!entry.isIntersecting) return;
     entry.target.classList.add('is-visible');
+    observer.unobserve(entry.target);
   };
 
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(reveal);
-    }, { threshold: 0.14 });
+      entries.forEach((entry) => reveal(entry, observer));
+    }, {
+      threshold: 0.16,
+      rootMargin: '0px 0px -8% 0px'
+    });
 
     revealItems.forEach((item) => observer.observe(item));
   } else {

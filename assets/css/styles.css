@@ -446,6 +446,7 @@ h3 {
   border-radius: 20px;
   background: rgba(255,255,255,.72);
   box-shadow: 0 14px 28px rgba(0,63,143,.06);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
 }
 
 .hero-metrics strong {
@@ -593,6 +594,7 @@ h3 {
   border-radius: 16px;
   background: #edf7fc;
   border: 1px solid rgba(0,63,143,.1);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
 }
 
 .hero-stats strong {
@@ -650,6 +652,7 @@ h3 {
   border-radius: 20px;
   background: var(--white);
   box-shadow: 0 10px 24px rgba(0, 63, 143, .06);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
 }
 
 .mission-vision h3 {
@@ -680,6 +683,7 @@ h3 {
     linear-gradient(180deg, rgba(237,247,252,.7), rgba(255,255,255,1)),
     var(--white);
   box-shadow: 0 12px 28px rgba(0, 63, 143, .07);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
 }
 
 .why-grid span {
@@ -865,6 +869,7 @@ h3 {
     linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
     linear-gradient(135deg, #0d3f88 0%, #1488d8 48%, #8fe8ff 100%);
   box-shadow: 0 20px 44px rgba(0, 63, 143, .18);
+  transition: box-shadow .24s ease, transform .24s ease;
 }
 
 .featured-project-media img {
@@ -872,6 +877,7 @@ h3 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform .55s ease, filter .4s ease;
 }
 
 .featured-project-media::before {
@@ -915,6 +921,7 @@ h3 {
     linear-gradient(180deg, rgba(255,255,255,.98), rgba(237,247,252,.92)),
     var(--white);
   box-shadow: 0 16px 34px rgba(0, 63, 143, .08);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
 }
 
 .featured-project-content h3 {
@@ -979,6 +986,7 @@ h3 {
   margin: -24px -24px 18px;
   object-fit: cover;
   border-radius: 22px 22px 0 0;
+  transition: transform .55s ease, filter .4s ease;
 }
 
 .projects-showcase article:hover,
@@ -1029,6 +1037,7 @@ h3 {
   border-radius: 22px;
   background: var(--white);
   box-shadow: 0 14px 28px rgba(0, 63, 143, .06);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
 }
 
 .capability-visual {
@@ -1044,6 +1053,7 @@ h3 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform .55s ease, filter .4s ease;
 }
 
 .capability-card h3 {
@@ -1108,6 +1118,7 @@ h3 {
   width: 100%;
   height: 220px;
   object-fit: cover;
+  transition: transform .55s ease, filter .4s ease;
 }
 
 .infrastructure-grid h3 {
@@ -1154,6 +1165,7 @@ h3 {
   width: 100%;
   height: 220px;
   object-fit: cover;
+  transition: transform .55s ease, filter .4s ease;
 }
 
 .civil-grid h3 {
@@ -1367,6 +1379,7 @@ td {
   padding: 30px;
   border-radius: 22px;
   box-shadow: var(--shadow);
+  transition: transform .22s ease, box-shadow .22s ease;
 }
 
 .contact-form label {
@@ -1455,6 +1468,7 @@ td {
   justify-content: center;
   margin-bottom: 18px;
   padding: 0;
+  transition: transform .22s ease, filter .22s ease;
 }
 
 .footer-brand p {
@@ -1479,7 +1493,7 @@ td {
 .footer-links a,
 .footer-contact a {
   color: rgba(23, 34, 51, .82);
-  transition: color .18s ease;
+  transition: color .18s ease, transform .18s ease;
 }
 
 .footer-links a:hover,
@@ -1487,6 +1501,57 @@ td {
 .footer-contact a:hover,
 .footer-contact a:focus-visible {
   color: var(--accent);
+  transform: translateX(3px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .mission-vision article:hover,
+  .mission-vision article:focus-within,
+  .why-grid article:hover,
+  .why-grid article:focus-within,
+  .capability-card:hover,
+  .capability-card:focus-within,
+  .featured-project-content:hover,
+  .featured-project-content:focus-within,
+  .contact-form:hover,
+  .contact-form:focus-within {
+    transform: translateY(-4px);
+    border-color: rgba(8,174,234,.24);
+    box-shadow: 0 18px 38px rgba(0, 63, 143, .12);
+  }
+
+  .featured-project:hover .featured-project-media img,
+  .featured-project:focus-within .featured-project-media img,
+  .projects-showcase article:hover img,
+  .projects-showcase article:focus-within img,
+  .capability-card:hover .capability-visual img,
+  .capability-card:focus-within .capability-visual img,
+  .infrastructure-grid article:hover img,
+  .infrastructure-grid article:focus-within img,
+  .civil-grid article:hover img,
+  .civil-grid article:focus-within img {
+    transform: scale(1.04);
+    filter: saturate(1.05) contrast(1.02);
+  }
+
+  .featured-project:hover .featured-project-media,
+  .featured-project:focus-within .featured-project-media {
+    box-shadow: 0 24px 52px rgba(0, 63, 143, .22);
+  }
+
+  .hero-metrics article:hover,
+  .hero-metrics article:focus-within,
+  .hero-stats div:hover,
+  .hero-stats div:focus-within {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 30px rgba(0, 63, 143, .1);
+  }
+
+  .footer-brand:hover .footer-logo-badge,
+  .footer-brand:focus-within .footer-logo-badge {
+    transform: translateY(-2px) scale(1.02);
+    filter: drop-shadow(0 12px 20px rgba(0, 106, 183, .16));
+  }
 }
 
 .footer-contact p {
@@ -1542,14 +1607,44 @@ td {
 }
 
 .reveal {
+  --reveal-x: 0px;
+  --reveal-y: 22px;
+  --reveal-scale: .985;
+  --reveal-blur: 8px;
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity .65s ease, transform .65s ease;
+  transform: translate3d(var(--reveal-x), var(--reveal-y), 0) scale(var(--reveal-scale));
+  filter: blur(var(--reveal-blur));
+  will-change: opacity, transform, filter;
+  transition:
+    opacity .78s cubic-bezier(.22, 1, .36, 1),
+    transform .78s cubic-bezier(.22, 1, .36, 1),
+    filter .78s ease;
 }
 
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0) scale(1);
+  filter: blur(0);
+}
+
+.reveal-soft {
+  --reveal-y: 16px;
+  --reveal-scale: .992;
+  --reveal-blur: 6px;
+}
+
+.reveal-up {
+  --reveal-y: 26px;
+}
+
+.reveal-left {
+  --reveal-x: -26px;
+  --reveal-y: 10px;
+}
+
+.reveal-right {
+  --reveal-x: 26px;
+  --reveal-y: 10px;
 }
 
 @keyframes logo-enter {
@@ -1605,6 +1700,7 @@ td {
   .reveal {
     opacity: 1;
     transform: none;
+    filter: none;
   }
 
   .header-orb,
